@@ -1,0 +1,58 @@
+<div class="form-wrapper">
+  <p-card header="Iniciar Sesión">
+    <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="emailInput" class="text">Email:</label>
+          <input
+            pInputText
+            [class]="markAsInvalidField('email')"
+            type="text"
+            id="emailInput"
+            aria-describedby="email-help"
+            formControlName="email"
+          />
+          <small
+            *ngIf="isInvalidField('email')"
+            id="email-help"
+            class="p-error"
+          >
+            {{ emailErrorMessage }}
+          </small>
+        </div>
+
+        <div class="p-field">
+          <label class="text">Contraseña:</label>
+          <p-password
+            [inputStyleClass]="markAsInvalidField('password')"
+            promptLabel="Ingrese una contraseña"
+            [toggleMask]="true"
+            [feedback]="false"
+            formControlName="password"
+            aria-describedby="password-help"
+          ></p-password>
+          <small
+            *ngIf="isInvalidField('password')"
+            id="password-help"
+            class="p-error"
+            >La contraseña es requerida</small
+          >
+        </div>
+      </div>
+
+      <button
+        pButton
+        type="submit"
+        class="p-button-raised"
+        label="Iniciar Sesión"
+      ></button>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <span>¿Aún no tienes una cuenta? </span>
+      <span class="text-link" [routerLink]="['/auth/register']"
+        >Regístrate</span
+      >
+    </ng-template>
+  </p-card>
+</div>

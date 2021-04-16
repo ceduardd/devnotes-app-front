@@ -1,0 +1,88 @@
+<div class="form-wrapper">
+  <p-card header="Registrarse">
+    <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="nameInput" class="text">Nombre:</label>
+          <input
+            pInputText
+            [class]="markAsInvalidField('name')"
+            type="text"
+            id="nameInput"
+            aria-describedby="name-help"
+            formControlName="name"
+          />
+          <small *ngIf="isInvalidField('name')" id="name-help" class="p-error"
+            >El nombre es requerido</small
+          >
+        </div>
+
+        <div class="p-field">
+          <label for="emailInput" class="text">Email:</label>
+          <input
+            pInputText
+            [class]="markAsInvalidField('email')"
+            type="text"
+            id="emailInput"
+            aria-describedby="email-help"
+            formControlName="email"
+          />
+          <small
+            *ngIf="isInvalidField('email')"
+            id="email-help"
+            class="p-error"
+          >
+            {{ emailErrorMessage }}
+          </small>
+        </div>
+
+        <div class="p-field">
+          <label class="text">Contraseña:</label>
+          <p-password
+            [inputStyleClass]="markAsInvalidField('password')"
+            promptLabel="Ingrese una contraseña"
+            [toggleMask]="true"
+            formControlName="password"
+            aria-describedby="password-help"
+          ></p-password>
+          <small
+            *ngIf="isInvalidField('password')"
+            id="password-help"
+            class="p-error"
+            >La contraseña debe tener al menos 6 caracteres</small
+          >
+        </div>
+
+        <div class="p-field">
+          <label class="text">Confirmar contraseña:</label>
+          <p-password
+            [inputStyleClass]="markAsInvalidField('password2')"
+            [feedback]="false"
+            formControlName="password2"
+            aria-describedby="password2-help"
+          ></p-password>
+          <small
+            *ngIf="isInvalidField('password2')"
+            id="password2-help"
+            class="p-error"
+            >Las contraseñas no coinciden</small
+          >
+        </div>
+      </div>
+
+      <button
+        pButton
+        type="submit"
+        class="p-button-raised"
+        label="Registrarse"
+      ></button>
+    </form>
+
+    <ng-template pTemplate="footer">
+      <span>¿Ya tienes una cuenta? </span>
+      <span class="text-link" [routerLink]="['/auth/login']"
+        >Iniciar Sesión</span
+      >
+    </ng-template>
+  </p-card>
+</div>

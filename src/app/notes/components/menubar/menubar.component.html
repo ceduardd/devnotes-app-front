@@ -1,0 +1,55 @@
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <a class="p-d-flex p-ai-center p-mr-2 text" [routerLink]="['/']">
+      <img src="assets/notepad.svg" height="40" />
+    </a>
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <button
+      pButton
+      label="Salir"
+      icon="pi pi-sign-out"
+      class="p-button-danger p-button-text"
+      (click)="showConfirm()"
+    ></button>
+  </ng-template>
+</p-menubar>
+
+<p-toast
+  position="center"
+  key="logoutToast"
+  (onClose)="onReject()"
+  [baseZIndex]="5000"
+  styleClass="toast-container"
+>
+  <ng-template let-message pTemplate="message">
+    <div class="p-flex p-flex-column" style="flex: 1">
+      <div class="p-text-center">
+        <i class="pi pi-sign-out" style="font-size: 3rem"></i>
+        <h4>{{ message.summary }}</h4>
+        <p>{{ message.detail }}</p>
+      </div>
+      <div class="p-grid p-fluid">
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirm()"
+            label="Sí"
+            class="p-button-success"
+          ></button>
+        </div>
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onReject()"
+            label="No"
+            class="p-button-secondary"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  margin: 0;
+  background-color: var(--surface-b);
+  font-family: var(--font-family);
+}
+
+.text {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.text-link {
+  color: var(--primary-color);
+  cursor: pointer;
+  outline: none;
+}
+
+.form-wrapper {
+  max-width: 480px;
+  width: 90%;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-wrapper {
+  max-width: 1328px;
+  width: 90%;
+  margin: auto;
+}
+
+.editor-wrapper {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-container {
+  max-width: 400px;
+  width: 90% !important;
+  margin: auto;
+}
+
+.profile-pic-container {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.flex-span {
+  flex: 1;
+}

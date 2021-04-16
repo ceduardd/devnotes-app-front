@@ -1,0 +1,150 @@
+<div class="content-wrapper">
+  <div class="p-my-4">
+    <h2 class="text p-my-0">Ajustes</h2>
+    <p-divider></p-divider>
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col-12 p-lg-8">
+      <div class="p-grid">
+        <div class="p-col-10 p-offset-1">
+          <form [formGroup]="settingsForm">
+            <!-- Personal Data -->
+            <div class="p-fluid">
+              <div class="p-field">
+                <label for="nameInput" class="text">Nombre:</label>
+                <input
+                  pInputText
+                  type="text"
+                  id="nameInput"
+                  formControlName="name"
+                />
+                <!-- <small class="p-error">El nombre es requerido</small> -->
+              </div>
+
+              <div class="p-field">
+                <label for="emailInput" class="text">Email:</label>
+                <input
+                  pInputText
+                  type="text"
+                  id="emailInput"
+                  formControlName="email"
+                />
+                <!-- <small class="p-error">Email no válido</small> -->
+              </div>
+            </div>
+
+            <!-- Show password fields -->
+            <span
+              class="text-link p-d-block p-mb-4"
+              (click)="showPasswordInputs()"
+            >
+              <i *ngIf="!passwordInputsHidden" class="pi pi-angle-down"></i>
+              <i *ngIf="passwordInputsHidden" class="pi pi-angle-up"></i>
+              {{
+                !passwordInputsHidden
+                  ? "Modificar contraseña"
+                  : "Cancelar la modificación de contraseña"
+              }}
+            </span>
+
+            <!-- Password fields -->
+            <div *ngIf="passwordInputsHidden" class="p-fluid">
+              <div class="p-field">
+                <label for="passwordInput" class="text"
+                  >Contraseña actual:</label
+                >
+                <input
+                  pInputText
+                  type="password"
+                  id="passwordInput"
+                  formControlName="password"
+                />
+                <!-- <small class="p-error">Contraseña incorrecta</small> -->
+              </div>
+
+              <div class="p-field">
+                <label for="newPass1Input" class="text"
+                  >Nueva contraseña:</label
+                >
+                <input
+                  pInputText
+                  type="password"
+                  id="newPass1Input"
+                  formControlName="newPass1"
+                />
+                <!-- <small class="p-error">Contraseña incorrecta</small> -->
+              </div>
+
+              <div class="p-field">
+                <label for="newPass2Input" class="text">Confimar:</label>
+                <input
+                  pInputText
+                  type="password"
+                  id="newPass2Input"
+                  formControlName="newPass2"
+                />
+                <!-- <small class="p-error">Contraseña incorrecta</small> -->
+              </div>
+            </div>
+
+            <button
+              pButton
+              type="submit"
+              label="Guardar"
+              icon="pi pi-save"
+              class="p-button-success p-my-2"
+              (click)="saveProfileChanges()"
+            ></button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-4">
+      <div class="p-grid">
+        <div class="p-col-10 p-offset-1 p-lg-offset-0">
+          <div class="p-field">
+            <label class="text">Foto de perfil:</label>
+            <p-card styleClass="profile-pic-container">
+              <ng-template pTemplate="header">
+                <img
+                  src="assets/profile-pic-placeholder.jpg"
+                  alt="Foto de perfil"
+                />
+              </ng-template>
+
+              <button
+                pButton
+                label="Subir"
+                icon="pi pi-upload"
+                class="p-button-text p-button-success p-mr-2"
+                (click)="updateProfilePic()"
+              ></button>
+              <button
+                pButton
+                label="Quitar"
+                icon="pi pi-times"
+                class="p-button-text p-button-danger"
+                (click)="removeProfilePic()"
+              ></button>
+            </p-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input
+  type="file"
+  #fileChooser
+  style="display: none"
+  (change)="fileChooserHandler($event)"
+/>
+
+<p-toast
+  key="successToast"
+  position="bottom-center"
+  styleClass="toast-container"
+>
+</p-toast>

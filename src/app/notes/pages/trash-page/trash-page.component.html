@@ -1,0 +1,66 @@
+<div class="content-wrapper">
+  <div class="p-my-4">
+    <h2 class="text p-my-0">Papelera</h2>
+    <p-divider></p-divider>
+  </div>
+
+  <div class="p-grid p-mb-4">
+    <div *ngFor="let note of notes" class="p-col-12 p-md-6 p-lg-3">
+      <p-card header="{{ note.title }}" subheader="{{ note.date | date }}">
+        <p>{{ note.content }}</p>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            icon="pi pi-undo"
+            class="p-button-info p-button-text"
+            (click)="restoreNote()"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger p-button-text"
+            (click)="showConfirm()"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<!-- Delete toast -->
+<p-toast
+  position="center"
+  key="deleteToast"
+  (onClose)="onReject()"
+  styleClass="toast-container"
+>
+  <ng-template let-message pTemplate="message">
+    <div class="p-flex p-flex-column" style="flex: 1">
+      <div class="p-text-center">
+        <i class="pi pi-trash" style="font-size: 3rem"></i>
+        <h4>{{ message.summary }}</h4>
+        <p>{{ message.detail }}</p>
+      </div>
+      <div class="p-grid p-fluid">
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirm()"
+            label="Sí"
+            class="p-button-success"
+          ></button>
+        </div>
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onReject()"
+            label="No"
+            class="p-button-secondary"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
