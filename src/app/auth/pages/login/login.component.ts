@@ -75,7 +75,6 @@ export class LoginComponent implements OnInit {
         if (ok === true) {
           this.router.navigateByUrl('/');
         } else {
-          // console.log(ok);
           this.showError(`${ok}`);
         }
       });

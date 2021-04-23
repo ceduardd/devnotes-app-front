@@ -139,41 +139,12 @@
                 ></button>
               </div>
             </div>
-            <!-- <p-card styleClass="profile-pic-container">
-              <ng-template pTemplate="header">
-                <img [src]="profilePic" alt="Foto de perfil" />
-              </ng-template>
-
-              <span *ngIf="uploading" class="p-d-flex p-jc-center">
-                Loading
-                <p-progressSpinner
-                  *ngIf="uploading"
-                  [style]="{
-                    width: '16px',
-                    height: '16px',
-                    marginLeft: '8px'
-                  }"
-                ></p-progressSpinner>
-              </span>
-            </p-card> -->
             <div class="p-d-flex profile-pic-container">
               <img
                 [src]="profilePic"
                 [style]="{ width: '100%' }"
                 alt="Foto de perfil"
               />
-
-              <span *ngIf="uploading" class="p-d-flex p-jc-center">
-                Loading
-                <p-progressSpinner
-                  *ngIf="uploading"
-                  [style]="{
-                    width: '16px',
-                    height: '16px',
-                    marginLeft: '8px'
-                  }"
-                ></p-progressSpinner>
-              </span>
             </div>
           </div>
         </div>

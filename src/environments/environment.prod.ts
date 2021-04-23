@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4000/api',
+  apiUrl: 'https://devnotesapp.azurewebsites.net/api',
   cloudinaryUrl: 'https://api.cloudinary.com/v1_1/dtetozs3z',
 };

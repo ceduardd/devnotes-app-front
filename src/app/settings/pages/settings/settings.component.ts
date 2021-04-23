@@ -17,7 +17,6 @@ export class SettingsComponent implements OnInit {
   @ViewChild('fileChooser') fileChooser!: ElementRef<HTMLInputElement>;
 
   passwordInputsHidden: boolean = true;
-  uploading: boolean = false;
 
   debouncer: Subject<string> = new Subject();
 
@@ -132,10 +131,7 @@ export class SettingsComponent implements OnInit {
     console.log(filesList);
 
     if (filesList.length > 0) {
-      this.uploading = true;
-      this.settingsService.uploadImage(filesList[0]).subscribe((_) => {
-        this.uploading = false;
-      });
+      this.settingsService.uploadImage(filesList[0]).subscribe((_) => {});
     }
   }
 
