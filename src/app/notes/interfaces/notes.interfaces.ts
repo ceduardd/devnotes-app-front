@@ -1,5 +1,15 @@
+export enum NoteStatus {
+  active,
+  archived,
+  trashed,
+}
+
 export interface Note {
-  date: Date;
+  id: number;
   title: string;
   content: string;
+  userId: number;
+  createdAt: Date;
+  updatedAt: Date;
+  status?: NoteStatus;
 }

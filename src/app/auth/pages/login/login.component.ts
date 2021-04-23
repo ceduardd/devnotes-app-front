@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+
 import { ValidatorService } from '../../../shared/services/validator.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
@@ -20,7 +25,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorService
+    private validatorService: ValidatorService,
+    private authService: AuthService,
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {}
@@ -36,6 +44,15 @@ export class LoginComponent implements OnInit {
     return this.isInvalidField(field) ? 'ng-invalid ng-dirty' : '';
   }
 
+  showError(summary: string) {
+    this.messageService.clear();
+    this.messageService.add({
+      key: 'errorToast',
+      severity: 'error',
+      summary,
+    });
+  }
+
   get emailErrorMessage(): string {
     const emailErrors = this.loginForm.get('email')?.errors;
 
@@ -49,13 +66,19 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // TODO: Implement login method
-    console.log(this.loginForm.value);
-
     this.loginForm.markAllAsTouched();
 
     if (!this.loginForm.invalid) {
-      console.log('submit...');
+      const { email, password } = this.loginForm.value;
+
+      this.authService.login(email, password).subscribe((ok) => {
+        if (ok === true) {
+          this.router.navigateByUrl('/');
+        } else {
+          // console.log(ok);
+          this.showError(`${ok}`);
+        }
+      });
     }
   }
 }

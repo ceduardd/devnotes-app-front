@@ -41,6 +41,9 @@
           <p-password
             [inputStyleClass]="markAsInvalidField('password')"
             promptLabel="Ingrese una contraseña"
+            weakLabel="Débil"
+            mediumLabel="Normal"
+            strongLabel="Fuerte"
             [toggleMask]="true"
             formControlName="password"
             aria-describedby="password-help"
@@ -86,3 +89,9 @@
     </ng-template>
   </p-card>
 </div>
+
+<p-toast
+  key="errorToast"
+  styleClass="toast-container"
+  position="top-right"
+></p-toast>

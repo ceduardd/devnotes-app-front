@@ -53,3 +53,7 @@ body {
 .flex-span {
   flex: 1;
 }
+
+.span-h {
+  height: 100%;
+}

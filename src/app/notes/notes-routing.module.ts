@@ -1,36 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from './pages/main-page/main-page.component';
-import { NotesPageComponent } from './pages/notes-page/notes-page.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { EditorPageComponent } from './pages/editor-page/editor-page.component';
-import { ArchivePageComponent } from './pages/archive-page/archive-page.component';
-import { TrashPageComponent } from './pages/trash-page/trash-page.component';
+
+import { ArchiveComponent } from './pages/archive/archive.component';
+import { EditorComponent } from './pages/editor/editor.component';
+import { MainComponent } from './pages/main/main.component';
+import { NotesComponent } from './pages/notes/notes.component';
+import { TrashComponent } from './pages/trash/trash.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainPageComponent,
+    component: MainComponent,
     children: [
       {
         path: '',
-        component: NotesPageComponent,
+        component: NotesComponent,
       },
       {
         path: 'archive',
-        component: ArchivePageComponent,
+        component: ArchiveComponent,
       },
       {
         path: 'trash',
-        component: TrashPageComponent,
+        component: TrashComponent,
       },
       {
         path: 'edit',
-        component: EditorPageComponent,
+        component: EditorComponent,
       },
       {
-        path: 'settings',
-        component: SettingsPageComponent,
+        path: 'edit/:id',
+        component: EditorComponent,
       },
       {
         path: '**',

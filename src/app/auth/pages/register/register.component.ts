@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { ValidatorService } from '../../../shared/services/validator.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
+  providers: [MessageService],
 })
 export class RegisterComponent implements OnInit {
   registerForm = this.fb.group(
@@ -33,10 +37,22 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorService
+    private validatorService: ValidatorService,
+    private messageService: MessageService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
+
+  showError(summary: string) {
+    this.messageService.clear();
+    this.messageService.add({
+      key: 'errorToast',
+      severity: 'error',
+      summary,
+    });
+  }
 
   isInvalidField(field: string): boolean {
     return (
@@ -62,13 +78,20 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    // TODO: implement register method
     console.log(this.registerForm.value);
 
     this.registerForm.markAllAsTouched();
 
     if (!this.registerForm.invalid) {
-      console.log('register...');
+      const { name, email, password } = this.registerForm.value;
+
+      this.authService.register(name, email, password).subscribe((ok) => {
+        if (ok === true) {
+          this.router.navigateByUrl('/');
+        } else {
+          this.showError(`${ok}`);
+        }
+      });
     }
   }
 }

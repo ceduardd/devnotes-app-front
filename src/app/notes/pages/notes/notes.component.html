@@ -1,0 +1,129 @@
+<div class="content-wrapper">
+  <div class="p-my-4">
+    <div
+      class="p-d-flex p-jc-between p-flex-column p-flex-md-row"
+      style="gap: 1rem"
+    >
+      <h2 class="text p-my-0">Bienvenido {{ user.name | firstName }}</h2>
+      <button
+        pButton
+        class="p-button-info"
+        label="Nueva nota"
+        icon="pi pi-plus"
+        [routerLink]="['/edit']"
+      ></button>
+    </div>
+    <p-divider></p-divider>
+  </div>
+
+  <div *ngIf="notes.length === 0">
+    <div class="p-d-flex p-flex-column p-ai-center">
+      <h3 class="text">¡No hay notas aquí!</h3>
+      <i class="pi pi-home text" [style]="{ fontSize: '3rem' }"></i>
+    </div>
+  </div>
+
+  <div class="p-grid p-mb-4">
+    <div *ngFor="let note of notes" class="p-col-12 p-md-6 p-lg-3">
+      <p-card header="{{ note.title }}" subheader="{{ note.createdAt | date }}">
+        <p>{{ note.content | maxContent }}</p>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-warning p-button-text p-mr-2"
+            [routerLink]="['/edit', note.id]"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-folder"
+            class="p-button-info p-button-text"
+            (click)="showConfirm('archiveToast', note.id)"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger p-button-text"
+            (click)="showConfirm('deleteToast', note.id)"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<p-toast
+  position="center"
+  key="deleteToast"
+  (onClose)="onReject()"
+  [baseZIndex]="5000"
+  styleClass="toast-container"
+>
+  <ng-template let-message pTemplate="message">
+    <div class="p-flex p-flex-column" style="flex: 1">
+      <div class="p-text-center">
+        <i class="pi pi-trash" style="font-size: 3rem"></i>
+        <h4>{{ message.summary }}</h4>
+        <p>{{ message.detail }}</p>
+      </div>
+      <div class="p-grid p-fluid">
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirmDelete()"
+            label="Sí"
+            class="p-button-success"
+          ></button>
+        </div>
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onReject()"
+            label="No"
+            class="p-button-secondary"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+
+<p-toast
+  position="center"
+  key="archiveToast"
+  (onClose)="onReject()"
+  [baseZIndex]="5000"
+  styleClass="toast-container"
+>
+  <ng-template let-message pTemplate="message">
+    <div class="p-flex p-flex-column" style="flex: 1">
+      <div class="p-text-center">
+        <i class="pi pi-folder" style="font-size: 3rem"></i>
+        <h4>{{ message.summary }}</h4>
+        <p>{{ message.detail }}</p>
+      </div>
+      <div class="p-grid p-fluid">
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirmArchive()"
+            label="Sí"
+            class="p-button-success"
+          ></button>
+        </div>
+        <div class="p-col-6">
+          <button
+            type="button"
+            pButton
+            (click)="onReject()"
+            label="No"
+            class="p-button-secondary"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
