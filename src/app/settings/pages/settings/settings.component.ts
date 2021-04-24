@@ -128,8 +128,6 @@ export class SettingsComponent implements OnInit {
 
     const filesList: FileList = target.files!;
 
-    console.log(filesList);
-
     if (filesList.length > 0) {
       this.settingsService.uploadImage(filesList[0]).subscribe((_) => {});
     }

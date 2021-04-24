@@ -1,7 +1,17 @@
 <div class="content-wrapper">
   <div class="editor-wrapper">
     <div class="p-d-flex p-jc-between p-my-4">
-      <h2 class="text p-my-0">Nueva Nota</h2>
+      <h2 *ngIf="loading; else title" [style]="{ margin: 0 }">
+        <p-progressSpinner
+          [style]="{ width: '30px', height: '30px' }"
+        ></p-progressSpinner>
+      </h2>
+
+      <ng-template #title>
+        <h2 class="text p-my-0">
+          {{ noteId ? "Actualizar Nota" : "Nueva Nota" }}
+        </h2>
+      </ng-template>
 
       <button
         pButton

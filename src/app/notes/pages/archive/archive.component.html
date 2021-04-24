@@ -4,7 +4,13 @@
     <p-divider></p-divider>
   </div>
 
-  <div *ngIf="notes.length === 0">
+  <div *ngIf="loading" class="p-d-flex p-jc-center">
+    <p-progressSpinner
+      [style]="{ width: '50px', height: '50px' }"
+    ></p-progressSpinner>
+  </div>
+
+  <div *ngIf="notes.length === 0 && !loading">
     <div class="p-d-flex p-flex-column p-ai-center">
       <h3 class="text">¡No hay notas aquí!</h3>
       <i class="pi pi-home text" [style]="{ fontSize: '3rem' }"></i>

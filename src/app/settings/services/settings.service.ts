@@ -31,7 +31,6 @@ export class SettingsService {
   }
 
   updateProfile(body: BodyProfile): Observable<boolean> {
-    console.log(body);
     return this.http
       .put<VerifyResponse>(`${this._apiUrl}/users/${this.user.id}`, body, {
         headers: this.headers,

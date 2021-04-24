@@ -12,6 +12,7 @@ import { Note, NoteStatus } from '../../interfaces/notes.interfaces';
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
   selectedNoteId!: number;
+  loading: boolean = true;
 
   constructor(
     private messageService: MessageService,
@@ -26,6 +27,7 @@ export class NotesComponent implements OnInit {
   ngOnInit(): void {
     this.notesServices.getAllNotes().subscribe((notes) => {
       this.notes = this.filterActiveNotes(notes);
+      this.loading = false;
     });
   }
 

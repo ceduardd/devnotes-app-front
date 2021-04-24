@@ -11,6 +11,7 @@ import { NotesService } from '../../services/notes.service';
 export class TrashComponent implements OnInit {
   notes: Note[] = [];
   selectedNoteId!: number;
+  loading: boolean = true;
 
   constructor(
     private messageService: MessageService,
@@ -20,6 +21,7 @@ export class TrashComponent implements OnInit {
   ngOnInit(): void {
     this.notesService.getAllNotes().subscribe((notes) => {
       this.notes = notes.filter((note) => note.status === NoteStatus.trashed);
+      this.loading = false;
     });
   }
 

@@ -12,6 +12,7 @@ import { NotesService } from '../../services/notes.service';
 })
 export class EditorComponent implements OnInit {
   noteId!: number;
+  loading: boolean = true;
 
   noteForm = this.fb.group({
     title: ['', [Validators.required]],
@@ -30,11 +31,12 @@ export class EditorComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params.id) {
         this.notesService.getNote(params.id).subscribe((res) => {
+          this.loading = false;
           this.noteId = res.id;
           this.resetForm(res.title, res.content);
         });
       } else {
-        console.log('no vino el id');
+        this.loading = false;
       }
     });
   }
@@ -80,7 +82,6 @@ export class EditorComponent implements OnInit {
   }
 
   discardChanges() {
-    // TODO: implement discard changes method
     this.router.navigateByUrl('/');
   }
 
@@ -92,8 +93,6 @@ export class EditorComponent implements OnInit {
   }
 
   saveChanges() {
-    // TODO: implement save changes method
-
     if (this.noteForm.invalid) {
       this.showToast('error', 'Complete todos los campos');
       return;
