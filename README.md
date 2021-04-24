@@ -2,7 +2,10 @@
 
 Aplicación de notas construida con Angular y PrimeNG
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
+[Live Demo](https://devnotesapp.herokuapp.com)
+
+![](./screenshots/notes-page.png)
+![](./screenshots/settings-page.png)
 
 ## Development server
 
